@@ -26,33 +26,32 @@ class UserControlador
 
     function CrearUsuario()
     {
-        if(empty($_POST['crear_email']) ){
+        if (empty($_POST['crear_email'])) {
 
             $this->view->ShowLogin("nada@nada.com no es un email, no se haga el gracioso y complete los campos con lo que se solicita POR FAVOR!");
-        }else if(empty($_POST['crear_nombre'])){
+        } else if (empty($_POST['crear_nombre'])) {
 
             $this->view->ShowLogin("...(vacio)... no es un nombre, si sus padres no le pusieron un nombre inventense uno... MUCHAS GRACIAS!");
+        } else {
+            if (!$userFromDB = $this->model->TraerUsuario($_POST['crear_nombre'])) {
 
-        }else{
-            if(!$userFromDB = $this->model->TraerUsuario($_POST['crear_nombre'])){
-
-                $this->view->ShowLogin("El nombre de usuario ya existe: use la imaginación!"); 
-            }else{
+                $this->view->ShowLogin("El nombre de usuario ya existe: use la imaginación!");
+            } else {
 
                 $hash = password_hash($_POST['crear_password'], PASSWORD_DEFAULT);
-                $user =$_POST["crear_email"];
+                $user = $_POST["crear_email"];
                 $userFromDB = $this->model->TraerUsuario($user);
-                if ($userFromDB){
-                    $this->view->ShowLogin("Ya usted tiene una cuenta con ese email, no aceptamos cuentas troll!");    
-                }else{
+                if ($userFromDB) {
+                    $this->view->ShowLogin("Ya usted tiene una cuenta con ese email, no aceptamos cuentas troll!");
+                } else {
                     $this->model->CrearUsuario($_POST['crear_nombre'], $_POST['crear_email'], $hash);
                     $this->view->ShowLogin("Ahora puede ingresar con su nuevo usuario");
                 }
             }
         }
-        }
-            
-        
+    }
+
+
 
 
     function VerificarUsuario()
@@ -80,14 +79,15 @@ class UserControlador
                 // No existe el user en la DB
                 $this->view->ShowLogin("El usuario no existe");
             }
-        }else{
+        } else {
             $this->view->ShowLogin("nada@nada.com no es un email, no se haga el gracioso y complete los campos con lo que se solicita POR FAVOR!");
         }
     }
 
-    function entrarSinUsuario(){
+    function entrarSinUsuario()
+    {
         session_start();
         $_SESSION['nombre_usuario'] = "admin";
         header("Location: " . BASE_URL . "Home");
     }
-   }
+}
