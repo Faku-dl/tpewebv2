@@ -18,7 +18,7 @@ define("LOGOUT", 'http://'.$_SERVER["SERVER_NAME"].':'.$_SERVER["SERVER_PORT"].d
 
 $r = new Router();
 
-$r->addRoute("tablaMaterias", "GET", "MateriasControlador", "tablaMaterias"); //decía "HOME" renombré a TblaMaterias 
+$r->addRoute("tablaMaterias", "GET", "MateriasControlador", "tablaMaterias"); 
 
 $r->addRoute("Select", "GET","MateriasControlador", "getMateriasPorAsig");
 $r->addRoute("Insertar", "POST","MateriasControlador", "InsertarMateria");
@@ -27,7 +27,7 @@ $r->addRoute("Editar/:ID", "GET", "MateriasControlador", "EditarID");
 $r->addRoute("Editar", "POST", "MateriasControlador", "EditarMateria");
 $r->addRoute("Detalle/:ID", "GET", "MateriasControlador", "DetalleMateria");
 /////////////////////////////////ALUMNO///////////////////////////////
-$r->addRoute("tablaAlumnos", "GET", "MateriasControlador", "tablaAlumnos"); //En su momento debería haber una tabla de alumnos en el main
+$r->addRoute("tablaAlumnos", "GET", "MateriasControlador", "tablaAlumnos"); 
 $r->addRoute("SelectAlumno", "GET","MateriasControlador", "getAlumnosPorAsig");
 $r->addRoute("InsertarAlumno", "POST","MateriasControlador", "InsertarAlumno");
 $r->addRoute("BorrarAlumno/:ID", "GET","MateriasControlador", "DeleteAlumno");
@@ -41,7 +41,7 @@ $r->addRoute("logout", "GET", "UserControlador", "cerrarSesion");
 $r->addRoute("CrearUsuario", "POST","UserControlador", "CrearUsuario");
 
 
-$r->addRoute("main", "GET","MateriasControlador","Home"); //Agregué este que aprentando en le nombre/fotito del header te lleva al main
+$r->addRoute("main", "GET","MateriasControlador","Home"); 
 
 $r->setDefaultRoute("MateriasControlador", "Home");
 //RUN
