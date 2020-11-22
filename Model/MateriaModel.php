@@ -79,6 +79,12 @@ class MateriaModel
         $sentencia->execute([$Asignatura]);
         return $sentencia->fetchAll(PDO::FETCH_OBJ);
     }
+    function getAlumnosPorId($idAlumno)
+    {
+        $sentencia = $this->db->prepare('SELECT * FROM alumno WHERE id_alumno=?');
+        $sentencia->execute([$idAlumno]);
+        return $sentencia->fetchAll(PDO::FETCH_OBJ);
+    }
 
     function insertarAlumno($alumno, $email, $conducta,$calificacion,$materia)
     {
@@ -87,16 +93,16 @@ class MateriaModel
     }
     function deleteAlumno($id_alumno = null)
     {
-
         $sentencia = $this->db->prepare('DELETE FROM alumno WHERE id_alumno=?');
         $sentencia->execute(array($id_alumno));
-        return $sentencia->fetchAll(PDO::FETCH_OBJ);
+        return $sentencia->rowCount();
     }
     function editAlumno($id_alumno, $alumno, $email,$conducta,$calificacion, $materia)
     {
 
         $sentencia = $this->db->prepare('UPDATE alumno  SET nombre_alumno=?, email=?, conducta=?, calificacion=?, materia=? WHERE id_alumno=?');
         $sentencia->execute(array($alumno, $email,$conducta,$calificacion, $materia, $id_alumno));
+        return $sentencia->rowCount();
     }
 
     function MostrarAlumno($id_alumno)//decia idmateria

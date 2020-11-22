@@ -6,7 +6,8 @@ class AlumnosControladorApi extends ApiController
 {
 
     function __construct()
-    {
+    {   
+        parent::__construct();
         $this->model = new MateriaModel();
         $this->view = new ViewApi();
     }
@@ -29,21 +30,38 @@ class AlumnosControladorApi extends ApiController
 
     function deleteAlumno($params = null)
     {
-
         $id_alumno = $params[':ID'];
-        $tareaRealizada = $this->model->deleteAlumno($id_alumno);
-        if ($tareaRealizada) {
 
-            $this->view->response("El alumno con el $id_alumno fue borrado", 200);
+        if ($this->model->getAlumnosPorId($id_alumno)) {
+
+            $this->model->deleteAlumno($id_alumno);
+            $this->view->response("El alumno con el id: $id_alumno fue borrado", 200);
         } else {
             $this->view->response("El alumno con el $id_alumno no exisite", 404);
         }
     }
     function agregarAlumno($params = null){
-
+        
         $body=$this->getData();
-        var_dump($body);
         $this->model->InsertarAlumno($body->nombre_alumno, $body->email, $body->conducta,$body->calificacion,$body->materia);
         $this->view->response("El alumno $body->nombre_alumno fue ingresado", 200);
+    }
+    
+    function editAlumno($params = null){
+        $id_alumno = $params[':ID'];
+        $body=$this->getData();
+        
+        if ($this->model->getAlumnosPorId($id_alumno)) {
+            
+            $cumplido=$this->model->editAlumno($id_alumno, $body->nombre_alumno, $body->email, $body->conducta,$body->calificacion,$body->materia);
+            if($cumplido>0){
+                $this->view->response("El alumno $body->nombre_alumno fue editado", 200);
+    
+            }else{
+                $this->view->response("El alumno $body->nombre_alumno no fue modificado", 204);
+            }
+        }else{
+            $this->view->response("El alumno $body->nombre_alumno no exisite", 404);
+        }
     }
 }
