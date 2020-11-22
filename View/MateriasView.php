@@ -66,12 +66,12 @@ class MateriasView
     $smarty->display("templates/EditarTablaAlumno.tpl");
   }
 
-  function showDetallesAlumno($Alumno, $Asignatura)
+  function showDetallesAlumno($Alumno)
   {
     $smarty = new Smarty();  //ESTO ES CUALQUIER COSA
     $smarty->assign("titulo", $Alumno->nombre_alumno);
-    $smarty->assign("tituloMateria", $Asignatura);
-    $smarty->assign("asignatura_s", $Asignatura);
+    $smarty->assign("tituloMateria", $Alumno->materia);
+    $smarty->assign("asignatura_s", $Alumno);
     $smarty->assign("alumno_s", $Alumno); //todo es cualquier cosa. Perdón
 
     $smarty->display("templates/detalleAlumno.tpl");

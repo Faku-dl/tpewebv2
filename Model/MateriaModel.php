@@ -1,6 +1,5 @@
 <?php
-require_once "RouterAvanzado.php";
-require_once "Controller/MateriasControlador.php";
+
 
 
 class MateriaModel
@@ -50,14 +49,14 @@ class MateriaModel
     }
 
     function MostrarMateria($id_materia)
-    {
-        $sentencia = $this->db->prepare('SELECT * FROM materia WHERE id_materia=?');
+    { 
+        $sentencia = $this->db->prepare('SELECT * FROM alumno INNER JOIN materia ON alumno.materia=materia.nombre_materia WHERE id_materia=?');
         $sentencia->execute([$id_materia]);
-        return $sentencia->fetch(PDO::FETCH_OBJ);
+        return $sentencia->fetchAll(PDO::FETCH_OBJ);
     }
     function getMateriaPorNombre($nombre_materia)
     {
-        $sentencia = $this->db->prepare('SELECT * FROM materia WHERE nombre_materia=?');
+        $sentencia = $this->db->prepare('SELECT FROM materia WHERE nombre_materia=?');
         $sentencia->execute([$nombre_materia]);
         return $sentencia->fetch(PDO::FETCH_OBJ);
     }
@@ -81,7 +80,7 @@ class MateriaModel
         return $sentencia->fetchAll(PDO::FETCH_OBJ);
     }
 
-    function InsertarAlumno($alumno, $email, $conducta,$calificacion,$materia)
+    function insertarAlumno($alumno, $email, $conducta,$calificacion,$materia)
     {
         $sentencia = $this->db->prepare('INSERT INTO alumno (nombre_alumno,email,conducta,calificacion, materia) VALUES(?,?,?,?,?) ');
         $sentencia->execute(array($alumno, $email, $conducta,$calificacion,$materia));
@@ -91,6 +90,7 @@ class MateriaModel
 
         $sentencia = $this->db->prepare('DELETE FROM alumno WHERE id_alumno=?');
         $sentencia->execute(array($id_alumno));
+        return $sentencia->fetchAll(PDO::FETCH_OBJ);
     }
     function editAlumno($id_alumno, $alumno, $email,$conducta,$calificacion, $materia)
     {
@@ -99,11 +99,17 @@ class MateriaModel
         $sentencia->execute(array($alumno, $email,$conducta,$calificacion, $materia, $id_alumno));
     }
 
-    function MostrarAlumno($id_materia)
+    function MostrarAlumno($id_alumno)//decia idmateria
     {
-        $sentencia = $this->db->prepare('SELECT * FROM alumno WHERE id_alumno=?');
-        $sentencia->execute([$id_materia]);
+        $sentencia = $this->db->prepare('SELECT * FROM alumno INNER JOIN materia ON alumno.materia=materia.nombre_materia WHERE id_alumno=?');
+        $sentencia->execute([$id_alumno]);
         return $sentencia->fetch(PDO::FETCH_OBJ);
     }
 
+
+
+
+
+
 };
+

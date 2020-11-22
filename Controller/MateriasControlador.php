@@ -24,7 +24,7 @@ class MateriasControlador
         if (empty($_SESSION['nombre_usuario'])) {
             //Existe un usuario logueado
         } else {
-            if (!empty($_SESSION['navegando']) && (time() - $_SESSION['navegando'] > 50)) {
+            if (!empty($_SESSION['navegando']) && (time() - $_SESSION['navegando'] > 20000)) {
 
                 header("Location: " . LOGOUT);
             }
@@ -113,7 +113,7 @@ class MateriasControlador
     {
         // $Asignatura = $_GET['action'];
         $this->comprobarSiHayUsuario();
-        if ($_GET['select_materia'] != "Todas") {
+        if (!empty($_GET['select_materia'])&& ($_GET['select_materia']!= "Todas")) {
             $Alumnos = $this->model->getAlumnosporAsig($_GET['select_materia']);
             $Titulo = "Materia:" . $_GET['select_materia'];
             $Asignatura = $this->model->getTodasLasMaterias();
@@ -122,7 +122,7 @@ class MateriasControlador
             $this->view->showTablaAlumnos();
         }
     }
-    function InsertarAlumno()
+    function insertarAlumno()
     {
         $this->comprobarSiHayUsuario();
         $this->model->InsertarAlumno($_POST['input_alumno'], $_POST['input_email'], $_POST['input_conducta'], $_POST['input_calificacion'], $_POST['select_materia']);
@@ -166,12 +166,10 @@ class MateriasControlador
     }
     function DetalleAlumno($params = null)
     {
-
+        
         $this->comprobarSiHayUsuario();
         $id_detalle = $params[':ID'];
         $Alumnos = $this->model->MostrarAlumno($id_detalle);
-        $nombre_materia = $Alumnos->materia;
-        $Asignatura = $this->model->getMateriaPorNombre($nombre_materia);
-        $this->view->showDetallesAlumno($Alumnos, $Asignatura);
+        $this->view->showDetallesAlumno($Alumnos);
     }
 }

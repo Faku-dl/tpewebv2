@@ -6,15 +6,9 @@ require_once "RouterClass.php";
 
 
 
-
-
 define ("BASE_URL", '//'.$_SERVER["SERVER_NAME"] . ':' . $_SERVER["SERVER_PORT"] . dirname($_SERVER["PHP_SELF"]).'/');
 define("LOGIN", 'http://'.$_SERVER["SERVER_NAME"].':'.$_SERVER["SERVER_PORT"].dirname($_SERVER["PHP_SELF"]).'/login');
 define("LOGOUT", 'http://'.$_SERVER["SERVER_NAME"].':'.$_SERVER["SERVER_PORT"].dirname($_SERVER["PHP_SELF"]).'/logout');
-
-//$controller= new MateriasControlador();
-//$partesURL= explode('/', $_GET['action']);
-// lee la acción
 
 $r = new Router();
 
@@ -46,3 +40,5 @@ $r->addRoute("main", "GET","MateriasControlador","Home");
 $r->setDefaultRoute("MateriasControlador", "Home");
 //RUN
 $r->route($_GET['action'], $_SERVER['REQUEST_METHOD']);
+
+?>
