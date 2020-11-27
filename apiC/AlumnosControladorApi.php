@@ -11,57 +11,52 @@ class AlumnosControladorApi extends ApiController
         $this->model = new MateriaModel();
         $this->view = new ViewApi();
     }
-    public function getAlumnos()
-    {
-        $alumnos = $this->model->getTodosLosAlumnos();
-        $this->view->response($alumnos, 200);
-    }
-    public function getAlumnosporAsig($params = null)
-    {
-        $id_materia = $params[':ID'];
-        $alumnos = $this->model->getAlumnosporAsig($id_materia);
-        if ($alumnos) {
-
-            $this->view->response($alumnos, 200);
-        } else {
-            $this->view->response("La materia $id_materia no contiene alumnos", 404);
-        }
-    }
-
-    function deleteAlumno($params = null)
+    public function getComentarioPorId($params = null)
     {
         $id_alumno = $params[':ID'];
-
-        if ($this->model->getAlumnosPorId($id_alumno)) {
-
-            $this->model->deleteAlumno($id_alumno);
-            $this->view->response("El alumno con el id: $id_alumno fue borrado", 200);
+        $alumno = $this->model->getAlumnosPorId($id_alumno);
+        if ($alumno) {
+            $comentarios = $this->model->getComentarios($alumno->nombre_alumno);
+            $this->view->response($comentarios, 200);
         } else {
-            $this->view->response("El alumno con el $id_alumno no exisite", 404);
+            $this->view->response("El no contiene comentarios", 404);
         }
     }
-    function agregarAlumno($params = null){
+
+    function deleteComentario($params = null)
+    {
+        $id_comentario = $params[':ID'];
+
+        if ($this->model->getComentarioPorId($id_comentario)) {
+
+            $this->model->deleteComentario($id_comentario);
+            $this->view->response("El comentario con el id: $id_comentario fue borrado", 200);
+        } else {
+            $this->view->response("El comentario con el $id_comentario no exisite", 404);
+        }
+    }
+    function agregarComentario($params = null){
         
         $body=$this->getData();
-        $this->model->InsertarAlumno($body->nombre_alumno, $body->email, $body->conducta,$body->calificacion,$body->materia);
-        $this->view->response("El alumno $body->nombre_alumno fue ingresado", 200);
+        $this->model->InsertarComentario($body->nombre_alumno, $body->contenido, $body->usuario_nombre);
+        $this->view->response("El comentario $body->nombre_alumno fue ingresado", 200);
     }
     
-    function editAlumno($params = null){
-        $id_alumno = $params[':ID'];
+    function editarComentario($params = null){
+        $id_comentario = $params[':ID'];
         $body=$this->getData();
         
-        if ($this->model->getAlumnosPorId($id_alumno)) {
+        if ($this->model->getComentarioPorId($id_comentario)) {
             
-            $cumplido=$this->model->editAlumno($id_alumno, $body->nombre_alumno, $body->email, $body->conducta,$body->calificacion,$body->materia);
+            $cumplido=$this->model->editarComentario($id_comentario, $body->nombre_alumno, $body->contenido, $body->usuario_nombre);
             if($cumplido>0){
-                $this->view->response("El alumno $body->nombre_alumno fue editado", 200);
+                $this->view->response("El comentario $body->usuario_nombre fue editado", 200);
     
             }else{
-                $this->view->response("El alumno $body->nombre_alumno no fue modificado", 204);
+                $this->view->response("El comentario $body->usuario_nombre no fue modificado", 204);
             }
         }else{
-            $this->view->response("El alumno $body->nombre_alumno no exisite", 404);
+            $this->view->response("El comentario $body->usuario_nombre no exisite", 404);
         }
     }
 }

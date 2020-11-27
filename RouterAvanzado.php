@@ -33,6 +33,8 @@ $r->addRoute("VerificarUsuario", "POST", "UserControlador", "VerificarUsuario");
 $r->addRoute("login", "GET", "UserControlador", "login");
 $r->addRoute("logout", "GET", "UserControlador", "cerrarSesion");
 $r->addRoute("CrearUsuario", "POST","UserControlador", "CrearUsuario");
+/////////////////////////////////COMENTARIOS///////////////////////////////
+$r->addRoute("comentarios","GET","MateriasControlador", "getComentariosCSR");
 
 
 $r->addRoute("main", "GET","MateriasControlador","Home"); 

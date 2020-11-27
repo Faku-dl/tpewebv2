@@ -66,18 +66,27 @@ class MateriasView
     $smarty->display("templates/EditarTablaAlumno.tpl");
   }
 
-  function showDetallesAlumno($Alumno)
+  function showDetallesAlumno($Alumno,$usuario)
   {
     $smarty = new Smarty();  //ESTO ES CUALQUIER COSA
     $smarty->assign("titulo", $Alumno->nombre_alumno);
     $smarty->assign("tituloMateria", $Alumno->materia);
     $smarty->assign("asignatura_s", $Alumno);
-    $smarty->assign("alumno_s", $Alumno); //todo es cualquier cosa. Perdón
-
+    $smarty->assign("alumno_s", $Alumno);
+    $smarty->assign("usuario", $usuario);
+    
     $smarty->display("templates/detalleAlumno.tpl");
   }
   function showTablaAlumnos()
   {
     header("Location:" . BASE_URL . "tablaAlumnos");
   }
+
+
+  function ShowComentariosCSR() {
+    $smarty = new Smarty();
+    $smarty->assign('titulo', "Lista de comentarios del Alumno");
+    $smarty->display('templates/comentarios.tpl'); // muestro el template 
+}
+
 };

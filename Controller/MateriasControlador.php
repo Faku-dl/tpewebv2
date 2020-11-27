@@ -169,7 +169,13 @@ class MateriasControlador
         
         $this->comprobarSiHayUsuario();
         $id_detalle = $params[':ID'];
-        $Alumnos = $this->model->MostrarAlumno($id_detalle);
-        $this->view->showDetallesAlumno($Alumnos);
+        $alumnos = $this->model->MostrarAlumno($id_detalle);
+        $usuario= $_SESSION['nombre_usuario'];
+        $this->view->showDetallesAlumno($alumnos, $usuario);
+    }
+    /////////////////////////////////COMENTARIOS///////////////////////////////
+    function getComentariosCSR(){
+
+        $this->view->showComentariosCSR();
     }
 }

@@ -80,10 +80,10 @@ class MateriaModel
         return $sentencia->fetchAll(PDO::FETCH_OBJ);
     }
     function getAlumnosPorId($idAlumno)
-    {
+    {       
         $sentencia = $this->db->prepare('SELECT * FROM alumno WHERE id_alumno=?');
         $sentencia->execute([$idAlumno]);
-        return $sentencia->fetchAll(PDO::FETCH_OBJ);
+        return $sentencia->fetch(PDO::FETCH_OBJ);
     }
 
     function insertarAlumno($alumno, $email, $conducta,$calificacion,$materia)
@@ -111,10 +111,37 @@ class MateriaModel
         $sentencia->execute([$id_alumno]);
         return $sentencia->fetch(PDO::FETCH_OBJ);
     }
+////////////////////////////////////COMENTARIO////////////////////////////////////////////////////
+    function deleteComentario($id_comentario = null)
+    {
+        $sentencia = $this->db->prepare('DELETE FROM comentario WHERE id_comentario=?');
+        $sentencia->execute(array($id_comentario));
+        return $sentencia->rowCount();
+    }
+    function editComentario($id_comentario, $nombre_alumno, $contenido,$usuario_nombre)
+    {
 
-
-
-
+        $sentencia = $this->db->prepare('UPDATE comentario  SET nombre_alumno=?, contenido=?, usuario_nombre=? WHERE id_comentario=?');
+        $sentencia->execute(array($nombre_alumno, $contenido,$usuario_nombre,$id_comentario));
+        return $sentencia->rowCount();
+    }
+    function getComentarios($nombre_alumno)
+    {
+        $sentencia = $this->db->prepare('SELECT * FROM comentario WHERE nombre_alumno=?');
+        $sentencia->execute([$nombre_alumno]);
+        return $sentencia->fetchAll(PDO::FETCH_OBJ);
+    }
+    function getComentariosPorId($id_comentario)
+    {
+        $sentencia = $this->db->prepare('SELECT * FROM comentario WHERE id_comentario=?');
+        $sentencia->execute([$id_comentario]);
+        return $sentencia->fetchAll(PDO::FETCH_OBJ);
+    }
+    function insertarComentario($nombre_alumno, $contenido,$usuario_nombre)
+    {
+        $sentencia = $this->db->prepare('INSERT INTO comentario (nombre_alumno,contenido,usuario_nombre) VALUES(?,?,?) ');
+        $sentencia->execute(array($nombre_alumno, $contenido,$usuario_nombre));
+    }
 
 
 };
