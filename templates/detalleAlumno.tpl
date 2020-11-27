@@ -1,7 +1,7 @@
 {include file="header.tpl"}
 <ul class="list-group">
     <input type="hidden" id="id_alumno" value="{$alumno_s->id_alumno}">
-    <li id="nombre_alumno" class="list-group-item">Nombre del Alumno: {$alumno_s->nombre_alumno}</li>
+    <h3 id="nombre_alumno" class="list-group-item text-center">{$alumno_s->nombre_alumno}</h3>
     <li class="list-group-item">Email: {$alumno_s->email} </li>
     <li class="list-group-item">Conducta: {$alumno_s->conducta}</li>
     <li class="list-group-item">Calificación: {$alumno_s->calificacion}</li>

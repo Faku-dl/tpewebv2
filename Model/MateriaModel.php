@@ -127,7 +127,7 @@ class MateriaModel
     }
     function getComentarios($nombre_alumno)
     {
-        $sentencia = $this->db->prepare('SELECT * FROM comentario WHERE nombre_alumno=?');
+        $sentencia = $this->db->prepare('SELECT * FROM comentario WHERE nombre_alumno=? ORDER by id_comentario DESC');
         $sentencia->execute([$nombre_alumno]);
         return $sentencia->fetchAll(PDO::FETCH_OBJ);
     }

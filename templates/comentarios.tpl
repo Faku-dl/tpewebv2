@@ -5,13 +5,13 @@
         <div class="comments">
           <div class="comment-box add-comment">
             <span class="commenter-pic">
-              <img src="/images/user-icon.jpg" class="img-fluid">
+              <!--<img src="../imgs/IconoPeron.jpg" class="img-fluid">-->
             </span>
-            <span class="commenter-name"><p id="usuario" >{$usuario}</p> 
+            <div class="commenter-name"><p id="usuario" >{$usuario}</p> 
               <input id="contenido" type="text" placeholder="Comentá, loro!" name="Add Comment">
               <button id="enviarComentario" type="submit" class="btn btn-success">Publicar</button>
-              <button type="button" class="btn btn-light">Cancelar</button>
-            </span>
+              <button id="borrarComentario" type="button" class="btn btn-light">Cancelar</button> <!--hacer funcion-->
+            </div>
           </div>
           
           <div id= "cajaComentarios"class="comment-box">

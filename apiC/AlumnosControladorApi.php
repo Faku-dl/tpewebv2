@@ -27,7 +27,7 @@ class AlumnosControladorApi extends ApiController
     {
         $id_comentario = $params[':ID'];
 
-        if ($this->model->getComentarioPorId($id_comentario)) {
+        if ($this->model->getComentariosPorId($id_comentario)) {
 
             $this->model->deleteComentario($id_comentario);
             $this->view->response("El comentario con el id: $id_comentario fue borrado", 200);
