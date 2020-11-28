@@ -38,7 +38,7 @@ class AlumnosControladorApi extends ApiController
     function agregarComentario($params = null){
         
         $body=$this->getData();
-        $this->model->InsertarComentario($body->nombre_alumno, $body->contenido, $body->usuario_nombre);
+        $this->model->InsertarComentario($body->nombre_alumno, $body->contenido, $body->usuario_nombre,$body->valoracion_alumno);
         $this->view->response("El comentario $body->nombre_alumno fue ingresado", 200);
     }
     

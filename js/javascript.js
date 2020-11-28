@@ -30,6 +30,12 @@ function render(comentarios){
   container.innerHTML =""; 
   
   comentarios.forEach(comentario => {
+    let estrellitas= comentario.valoracion_alumno;
+    let estrella="";
+    for(let i=0; i<estrellitas;i++){
+      estrella+="⭐";
+    }
+
     container.innerHTML += `
     <span class="commenter-pic">
     </span>
@@ -37,6 +43,7 @@ function render(comentarios){
     <a href="#">${comentario.usuario_nombre}</a>
     </span>
     <p class="student-name">${comentario.nombre_alumno}</p>
+    <p class="estrellitas" >Valoracion: ${estrella}</p>
     <p class="comment-txt more">${comentario.contenido}</p>
     <div class="comment-meta">
     <button id="editComment" type="button" class="btn btn-outline-warning">Editar</button>
@@ -52,14 +59,14 @@ function render(comentarios){
 
 function deleteComentario(){
 
-  const id= this.value;
-  console.log(id);
+  let id= this.value;
+
   const url= 'http://localhost/tpeweb2/api/alumnos/'+id;
   fetch(url, {
     method: 'DELETE',
-    header:{ "Content-type":"application/json"},
+    
   })
-  .then(response => response.json())
+
   .then(getComentarios())
   .catch(error => console.log('error', error));
 }
@@ -70,11 +77,13 @@ function postComentario(){
     const comentario ={
       contenido: document.getElementById("contenido").value,
       usuario_nombre:document.getElementById("usuario").innerHTML,
-      nombre_alumno: document.getElementById("nombre_alumno").innerHTML
+      nombre_alumno: document.getElementById("nombre_alumno").innerHTML,
+      valoracion_alumno: document.getElementById("select").value
     } 
     console.log(document.getElementById("contenido").value);
     console.log(document.getElementById("usuario").innerHTML);
     console.log(document.getElementById("nombre_alumno").innerHTML);
+    console.log( document.getElementById("select").value);
     const url= 'http://localhost/tpeweb2/api/alumnos/';
       fetch(url, {
         method: 'POST',

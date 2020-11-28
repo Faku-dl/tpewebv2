@@ -137,10 +137,10 @@ class MateriaModel
         $sentencia->execute([$id_comentario]);
         return $sentencia->fetchAll(PDO::FETCH_OBJ);
     }
-    function insertarComentario($nombre_alumno, $contenido,$usuario_nombre)
+    function insertarComentario($nombre_alumno, $contenido,$usuario_nombre, $valoracion_alumno)
     {
-        $sentencia = $this->db->prepare('INSERT INTO comentario (nombre_alumno,contenido,usuario_nombre) VALUES(?,?,?) ');
-        $sentencia->execute(array($nombre_alumno, $contenido,$usuario_nombre));
+        $sentencia = $this->db->prepare('INSERT INTO comentario (nombre_alumno,contenido,usuario_nombre,valoracion_alumno) VALUES(?,?,?,?) ');
+        $sentencia->execute(array($nombre_alumno, $contenido,$usuario_nombre, $valoracion_alumno));
     }
 
 

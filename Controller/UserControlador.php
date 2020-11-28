@@ -19,6 +19,8 @@ class UserControlador
         header("Location: " . LOGIN);
     }
 
+
+
     function login()
     {
         $this->view->ShowLogin();
@@ -99,7 +101,6 @@ class UserControlador
 
     }
     function getUsuarios(){
-        comprobarSiHayUsuario();
         $usuarios= $this->model->getUsuarios();
         $this->view->ShowtablaUsuarios($usuarios);
     }
