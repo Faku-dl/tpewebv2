@@ -29,6 +29,8 @@ $r->addRoute("EditarAlumno/:ID", "GET", "MateriasControlador", "EditarIdAlumno")
 $r->addRoute("EditarAlumno", "POST", "MateriasControlador", "EditarAlumno");
 $r->addRoute("DetalleAlumno/:ID", "GET", "MateriasControlador", "DetalleAlumno");
 /////////////////////////////////USUARIO///////////////////////////////
+
+$r->addRoute("tablaUsuarios", "GET", "UserControlador", "getUsuarios"); 
 $r->addRoute("VerificarUsuario", "POST", "UserControlador", "VerificarUsuario");
 $r->addRoute("login", "GET", "UserControlador", "login");
 $r->addRoute("logout", "GET", "UserControlador", "cerrarSesion");

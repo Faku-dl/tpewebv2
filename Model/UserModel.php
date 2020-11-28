@@ -21,10 +21,22 @@ class UserModel
         return $sentencia->fetch(PDO::FETCH_OBJ);
     }
       
-    function CrearUsuario($nombre,$email,$password)
+    function CrearUsuario($nombre, $administrador,$email,$password)
     {
-        $sentencia = $this->db->prepare('INSERT INTO usuario (nombre_usuario,email, password_u) VALUES(?,?,?)');
-        $sentencia->execute(array($nombre,$email,$password));
+        $sentencia = $this->db->prepare('INSERT INTO usuario (nombre_usuario,administrador, email, password_u) VALUES(?,?,?,?)');
+        $sentencia->execute(array($nombre, $administrador,$email,$password));
+    }
+    
+    function getUsuarios(){
+        $sentencia = $this->db->prepare("SELECT * FROM usuario");
+        $sentencia->execute();
+        return $sentencia->fetchAll(PDO::FETCH_OBJ);
+    }
+    function editUsuario($email,$administrador)
+    {
+
+        $sentencia = $this->db->prepare('UPDATE usuario  SET administrador=? WHERE email=?');
+        $sentencia->execute(array($email,$administrador));
     }
 
 

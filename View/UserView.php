@@ -20,6 +20,17 @@ class UserView{
         $smarty->display('templates/login.tpl');
     }
 
+    function ShowtablaUsuarios($usuarios = null){
+        $smarty = new Smarty();
+        $this->title= "Tabla de Usuarios";
+        $smarty->assign('titulo', $this->title);
+        $smarty->assign('usuarios_s', $usuarios);
+
+        $smarty->display('templates/tablaUsuarios.tpl');
+    }
+
+
+
 }
 
 

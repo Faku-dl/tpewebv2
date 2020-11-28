@@ -26,8 +26,8 @@ function getComentarios(){
 }
 
 function render(comentarios){
-  
-  const container= document.querySelector("#cajaComentarios");
+  let container= document.querySelector("#cajaComentarios");
+  container.innerHTML =""; 
   
   comentarios.forEach(comentario => {
     container.innerHTML += `
@@ -65,8 +65,8 @@ function deleteComentario(){
 }
 
 
-function postComentario(e){
-  e.preventDefault();
+function postComentario(){
+  
     const comentario ={
       contenido: document.getElementById("contenido").value,
       usuario_nombre:document.getElementById("usuario").innerHTML,
