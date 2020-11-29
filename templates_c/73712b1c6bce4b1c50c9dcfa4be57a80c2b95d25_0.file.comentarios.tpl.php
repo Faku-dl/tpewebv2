@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.34-dev-7, created on 2020-11-28 21:50:51
+/* Smarty version 3.1.34-dev-7, created on 2020-11-28 22:31:36
   from 'C:\xampp\htdocs\tpeweb2\templates\comentarios.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.34-dev-7',
-  'unifunc' => 'content_5fc2b82ba665c9_22970226',
+  'unifunc' => 'content_5fc2c1b83268a0_27857695',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '73712b1c6bce4b1c50c9dcfa4be57a80c2b95d25' => 
     array (
       0 => 'C:\\xampp\\htdocs\\tpeweb2\\templates\\comentarios.tpl',
-      1 => 1606596648,
+      1 => 1606596674,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5fc2b82ba665c9_22970226 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5fc2c1b83268a0_27857695 (Smarty_Internal_Template $_smarty_tpl) {
 ?><body>
     <div class="container">
         <div class="row">
@@ -63,7 +63,6 @@ function content_5fc2b82ba665c9_22970226 (Smarty_Internal_Template $_smarty_tpl)
               <button type="button" class="btn btn-outline-danger">Eliminar</button>
             </div>
           </div>-->
-
                     </div>
                 </div>
             </div>

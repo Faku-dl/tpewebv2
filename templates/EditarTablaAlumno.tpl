@@ -8,7 +8,7 @@
 
         <!-- Modal Cuerpo -->
         <div class="modal-body">
-            <form action="EditarAlumno" method="POST">
+            <form action="EditarAlumno" method="POST" enctype="multipart/form-data">
                 <!--REVISAR FORM ACTION-->
                 <div class="form-group">
                     <input type="hidden" name="id_alumno" value="{$alumno_id}">
@@ -29,6 +29,10 @@
                     <label for="calificacion">Calificación:</label>
                     <input type="text" class="form-control" id="Calificacion" name="edit_calificacion" placeholder="Calificación">
                 </div>
+                <div class="form-group">
+                    <label for="description">Imagen</label>
+                    <input type="file" id="subirImagen" name="input_imagen" class="form-control">
+                </div>
                 <label for="validationCustom04">Seleccione la Materia a elegir:</label>
                 <select class="custom-select" id="validationCustom04" name="select_materia">
                     {foreach from=$asignatura_s item= materia}
@@ -40,7 +44,7 @@
                 <div class="invalid-feedback">
                     <h4>Ingrese una materia</h4>
                 </div>
-                 <!-- Modal botón Editar -->
+                <!-- Modal botón Editar -->
                 <div>
                 </div>
                 <button type="submit" class="btn btn-warning">Editar</button>
@@ -55,26 +59,26 @@
                     <th>Calificación</th>
                     <th>Materia</th>
                     {if isset($smarty.session.nombre_usuario)}
-                    <th>Editar</th>
-                    <th>Borrar</th>
+                        <th>Editar</th>
+                        <th>Borrar</th>
                     {/if}
                 </tr>
             </thead>
             <tbody>
-            {foreach from=$alumnos_s item= alumno}
-                <tr>
-                    <td><a href="DetalleAlumno/{$alumno->id_alumno}">{$alumno->nombre_alumno}</a></td>
-                    <td>{$alumno->email}</td>
-                    <td>{$alumno->conducta}</td>
-                    <td>{$alumno->calificacion}</td>
-                    <td>{$alumno->materia}</td>
-                    {if isset($smarty.session.nombre_usuario)}
-                    <td> <button type="button" class="btn btn-warning"><a class="text-white text-decoration-none" href="EditarAlumno/{$alumno->id_alumno}">Menu</a></button></td>
-                    <td> <button type="button" class="btn btn-danger"><a class="text-white text-decoration-none" href="BorrarAlumno/{$alumno->id_alumno}">Borrar</a></button></td>
-                    {/if}
-                    <br>
-                </tr>
-            {/foreach}
+                {foreach from=$alumnos_s item= alumno}
+                    <tr>
+                        <td><a href="DetalleAlumno/{$alumno->id_alumno}">{$alumno->nombre_alumno}</a></td>
+                        <td>{$alumno->email}</td>
+                        <td>{$alumno->conducta}</td>
+                        <td>{$alumno->calificacion}</td>
+                        <td>{$alumno->materia}</td>
+                        {if isset($smarty.session.nombre_usuario)}
+                            <td> <button type="button" class="btn btn-warning"><a class="text-white text-decoration-none" href="EditarAlumno/{$alumno->id_alumno}">Menu</a></button></td>
+                            <td> <button type="button" class="btn btn-danger"><a class="text-white text-decoration-none" href="BorrarAlumno/{$alumno->id_alumno}">Borrar</a></button></td>
+                        {/if}
+                        <br>
+                    </tr>
+                {/foreach}
             </tbody>
         </table>
     </div>

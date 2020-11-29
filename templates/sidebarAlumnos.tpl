@@ -39,7 +39,7 @@
                 <!-- Modal Cuerpo -->
                 <div class="modal-body">
                     <div class="form-group">
-                        <form action="InsertarAlumno" method="POST">
+                        <form action="InsertarAlumno" method="POST" enctype="multipart/form-data">
                             <div class="form-group">
                                 <label for="title">Alumno</label>
                                 <input class="form-control" id="materia" name="input_alumno" aria-describedby="emailHelp" placeholder="Nombre del Angelito">
@@ -55,6 +55,10 @@
                             <div class="form-group">
                                 <label for="description">Calificación</label>
                                 <input type="number" class="form-control" id="Calificación" name="input_calificacion" placeholder="Calificación">
+                            </div>
+                            <div class="form-group">
+                                <label for="description">Imagen</label>
+                                <input type="file" id="subirImagen" name="input_imagen" class="form-control">
                             </div>
                             <label for="validationCustom04">Seleccione la Materia a concurrir:</label>
                             <select class="custom-select" id="validationCustom04" name="select_materia">

@@ -125,8 +125,29 @@ class MateriasControlador
     function insertarAlumno()
     {
         $this->comprobarSiHayUsuario();
-        $this->model->InsertarAlumno($_POST['input_alumno'], $_POST['input_email'], $_POST['input_conducta'], $_POST['input_calificacion'], $_POST['select_materia']);
-        $this->view->showTablaAlumnos();
+
+        if($_FILES['input_imagen']['type'] == "image/jpg" || $_FILES['input_imagen']['type'] == "image/jpeg" || $_FILES['input_imagen']['type'] == "image/png"&&!empty($_POST['select_materia'])
+        &&!empty($_POST['input_calificacion'])&&!empty($_POST['input_conducta'])&&!empty($_POST['input_email'])&&!empty($_POST['input_alumno'])){
+
+           /* $fileTemp = $_FILES["input_imagen"]["tmp_name"];
+            $filePath = "imgs/" . uniqid("", true) . "." . strtolower(pathinfo($_FILES['input_imagen']['name'], PATHINFO_EXTENSION));
+            move_uploaded_file( $fileTemp, $filePath);*/
+
+            $this->model->InsertarAlumno($_POST['input_alumno'], $_POST['input_email'], $_POST['input_conducta'], $_POST['input_calificacion'], $_POST['select_materia'],$_FILES["input_imagen"]["tmp_name"]);
+            $this->view->showTablaAlumnos();
+
+        }else{
+
+            $this->model->InsertarAlumno($_POST['input_alumno'], $_POST['input_email'], $_POST['input_conducta'], $_POST['input_calificacion'], $_POST['select_materia'],null);
+            $this->view->showTablaAlumnos();
+        }
+
+    }
+
+    //////////////////////////////////////////////
+    function borrarImagen(){
+
+        unlink(‘tutorial.txt’);
     }
     function tablaAlumnos()
     {
@@ -161,7 +182,8 @@ class MateriasControlador
         $conducta = $_POST['edit_conducta'];
         $calificacion = $_POST['edit_calificacion'];
         $materia = $_POST['select_materia'];
-        $this->model->editAlumno($id_alumno, $alumno, $email, $conducta, $calificacion, $materia);
+        $imagen= $_FILES["input_imagen"]["name"];
+        $this->model->editAlumno($id_alumno, $alumno, $email, $conducta, $calificacion, $materia,$imagen);
         $this->view->showTablaAlumnos();
     }
     function DetalleAlumno($params = null)

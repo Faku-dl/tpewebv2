@@ -86,10 +86,15 @@ class MateriaModel
         return $sentencia->fetch(PDO::FETCH_OBJ);
     }
 
-    function insertarAlumno($alumno, $email, $conducta,$calificacion,$materia)
-    {
-        $sentencia = $this->db->prepare('INSERT INTO alumno (nombre_alumno,email,conducta,calificacion, materia) VALUES(?,?,?,?,?) ');
-        $sentencia->execute(array($alumno, $email, $conducta,$calificacion,$materia));
+    function insertarAlumno($alumno, $email, $conducta,$calificacion,$materia,$filePath=null)
+    { 
+     
+        $direccion = null;
+       if ($filePath!=null){
+           $direccion = $this->subirImagen($filePath);
+    }
+        $sentencia = $this->db->prepare('INSERT INTO alumno (nombre_alumno,email,conducta,calificacion, materia, imagen) VALUES(?,?,?,?,?,?) ');
+        $sentencia->execute(array($alumno, $email, $conducta,$calificacion,$materia, $direccion));
     }
     function deleteAlumno($id_alumno = null)
     {
@@ -97,11 +102,15 @@ class MateriaModel
         $sentencia->execute(array($id_alumno));
         return $sentencia->rowCount();
     }
-    function editAlumno($id_alumno, $alumno, $email,$conducta,$calificacion, $materia)
+    function editAlumno($id_alumno, $alumno, $email,$conducta,$calificacion, $materia,$filePath=null)
     {
-
-        $sentencia = $this->db->prepare('UPDATE alumno  SET nombre_alumno=?, email=?, conducta=?, calificacion=?, materia=? WHERE id_alumno=?');
-        $sentencia->execute(array($alumno, $email,$conducta,$calificacion, $materia, $id_alumno));
+    
+        $direccion = null;
+       if ($filePath!=null){
+           $direccion = $this->subirImagen($filePath);
+    }
+        $sentencia = $this->db->prepare('UPDATE alumno  SET nombre_alumno=?, email=?, conducta=?, calificacion=?, materia=?, imagen=? WHERE id_alumno=?');
+        $sentencia->execute(array($alumno, $email,$conducta,$calificacion, $materia,$direccion,$id_alumno));
         return $sentencia->rowCount();
     }
 
@@ -110,7 +119,15 @@ class MateriaModel
         $sentencia = $this->db->prepare('SELECT * FROM alumno INNER JOIN materia ON alumno.materia=materia.nombre_materia WHERE id_alumno=?');
         $sentencia->execute([$id_alumno]);
         return $sentencia->fetch(PDO::FETCH_OBJ);
+
     }
+
+    private function subirImagen($imagen){
+        $lugar = "imgs/" . uniqid() . '.jpeg';
+        move_uploaded_file($imagen, $lugar);
+        return $lugar;
+    }
+
 ////////////////////////////////////COMENTARIO////////////////////////////////////////////////////
     function deleteComentario($id_comentario = null)
     {

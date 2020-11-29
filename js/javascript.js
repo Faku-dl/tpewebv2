@@ -80,10 +80,7 @@ function postComentario(){
       nombre_alumno: document.getElementById("nombre_alumno").innerHTML,
       valoracion_alumno: document.getElementById("select").value
     } 
-    console.log(document.getElementById("contenido").value);
-    console.log(document.getElementById("usuario").innerHTML);
-    console.log(document.getElementById("nombre_alumno").innerHTML);
-    console.log( document.getElementById("select").value);
+    document.getElementById("contenido").innerHTML="";
     const url= 'http://localhost/tpeweb2/api/alumnos/';
       fetch(url, {
         method: 'POST',
@@ -93,5 +90,6 @@ function postComentario(){
       .then(response => response.json())
       .then(getComentarios())
       .catch(error => console.log('error', error));
+      
 
 }
