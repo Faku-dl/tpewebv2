@@ -5,26 +5,37 @@
             <thead class="thead-dark">
                 <tr>
                     <th>Nombre</th>
-                    <th>Administrador</th>
-                    <th>email</th>
-                    {if isset($smarty.session.administrador)}
+                    <th>Permisos</th>
+                    <th>Email</th>
                     <th>Editar</th>
                     <th>Borrar</th>
-                    {/if}
                 </tr>
             </thead>
             <tbody>
                 {foreach from=$usuarios_s item= usuario}
                     <tr>
                         <td><a href="DetalleAlumno/{$usuario->id_usuario}">{$usuario->nombre_usuario}</a></td>
-                        <td>{$usuario->administrador}</td>
+                        {if ($usuario->administrador == 0)}
+                        <td class="text-info font-weight-bold">Usuario</td>
+                        {else}
+                        <td class="text-success font-weight-bold">Admin</td>
+                        {/if}
                         <td>{$usuario->email}</td>
-                        {if isset($smarty.session.administrador)}
-                            <input type="checkbox" checked data-toggle="toggle" data-on="Ready" data-off="Not Ready" data-onstyle="success" data-offstyle="danger">Admin
-                            
+                        
+                        <!-- Estos solo se pueden ver si uno es Admin -->
+
+                        {if ($usuario->administrador eq 0)}
+                            <td> <button type="button" class="btn btn-warning" href="CambiarPermiso/{$usuario->id_usuario}">Ascender a Admin</button> </td>
+                        {elseif ($usuario->nombre_usuario eq Peron)}
+                            <td> <button type="button" class="btn btn-outline-warning" disabled>Descender a Usuario</button> </td>
+                        {else}
+                            <td> <button type="button" class="btn btn-outline-warning">Descender a Usuario</button> </td>
+                        {/if}
+                        {if ($usuario->nombre_usuario eq Peron)}
+                            <td> <button type="button" class="btn btn-danger" disabled><a class="text-white text-decoration-none" href="BorrarUsuario/{$usuario->id_usuario}">Borrar</a></button></td>                          
+                        {else}
                         <td> <button type="button" class="btn btn-danger"><a class="text-white text-decoration-none" href="BorrarUsuario/{$usuario->id_usuario}">Borrar</a></button></td>
                         {/if}
-                        <br>
                     </tr>
                 {/foreach}
             </tbody>

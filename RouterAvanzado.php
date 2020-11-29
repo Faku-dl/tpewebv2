@@ -28,9 +28,12 @@ $r->addRoute("BorrarAlumno/:ID", "GET","MateriasControlador", "DeleteAlumno");
 $r->addRoute("EditarAlumno/:ID", "GET", "MateriasControlador", "EditarIdAlumno");
 $r->addRoute("EditarAlumno", "POST", "MateriasControlador", "EditarAlumno");
 $r->addRoute("DetalleAlumno/:ID", "GET", "MateriasControlador", "DetalleAlumno");
+$r->addRoute("borrarImagen/:ID", "GET", "MateriasControlador", "borrarImagen");
 /////////////////////////////////USUARIO///////////////////////////////
 
-$r->addRoute("tablaUsuarios", "GET", "UserControlador", "getUsuarios"); 
+$r->addRoute("usuarios", "GET", "UserControlador", "getUsuarios"); 
+$r->addRoute("CambiarPermiso/:ID", "POST", "UserControlador", "editarUsuario");
+$r->addRoute("BorrarUsuario/:ID", "GET", "UserControlador", "borrarUsuario"); 
 $r->addRoute("VerificarUsuario", "POST", "UserControlador", "VerificarUsuario");
 $r->addRoute("login", "GET", "UserControlador", "login");
 $r->addRoute("logout", "GET", "UserControlador", "cerrarSesion");

@@ -15,19 +15,19 @@
                 </div>
                 <div class="form-group">
                     <label for="alumno">Alumno:</label>
-                    <input type="text" class="form-control" id="alumno" name="edit_alumno" placeholder="Nombre de la alumno">
+                    <input type="text" class="form-control" id="alumno" name="edit_alumno" value={$alumno_s->nombre_alumno}>
                 </div>
                 <div class="form-group">
                     <label for="email">Email:</label>
-                    <input type="text" class="form-control" id="email" name="edit_email" placeholder="Email">
+                    <input type="text" class="form-control" id="email" name="edit_email" value={$alumno_s->email}>
                 </div>
                 <div class="form-group">
                     <label for="Conducta">Conducta:</label>
-                    <input type="text" class="form-control" id="Conducta" name="edit_conducta" placeholder="Conducta">
+                    <input type="text" class="form-control" id="Conducta" name="edit_conducta" value={$alumno_s->conducta}>
                 </div>
                 <div class="form-group">
                     <label for="calificacion">Calificación:</label>
-                    <input type="text" class="form-control" id="Calificacion" name="edit_calificacion" placeholder="Calificación">
+                    <input type="text" class="form-control" id="Calificacion" name="edit_calificacion" value={$alumno_s->calificacion}>
                 </div>
                 <div class="form-group">
                     <label for="description">Imagen</label>

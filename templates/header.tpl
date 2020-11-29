@@ -48,15 +48,13 @@
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal10" data-keyboard="true">Crear una cuenta</a>
             </li>
             <li class="nav-item">
-                        <button type="button" class="btn btn-primary"> <a href="login" class="text-white show-decoration-none"> Ingresar</a></button>
-                    </li>
-                {/if}
-
-                <!-- 
-                    <li class="nav-item">
-                        <button type="button" class="btn btn-primary"> <a href="logout" class="text-white show-decoration-none"> Cerrar sesión</a></button>
-                    </li>
-                -->
+                <button type="button" class="btn btn-primary"> <a href="login" class="text-white show-decoration-none"> Ingresar</a></button>
+            </li>
+        {/if}
+        <!-- Solo se debe poder ver si el usuario es Admin-->
+            <li>
+                <button type="button" class="btn btn-danger"> <a href="usuarios" class="text-white show-decoration-none"> Usuarios</a></button>
+            </li>
 
                 <!-- VENTANA para CREAR CUENTA -->
                 <div class="modal fade" id="myModal10">
@@ -72,7 +70,6 @@
                             <div class="container">
                             <h3>Perón te necesita</h3>
                                 <div class="modal-body">
-                                    <!-- REVISAR FORM ACTION-->
                                     <form action="CrearUsuario" method="POST" class="was-validated" valid-feedback>
                                         <div class="form-group">
                                             <P></P>

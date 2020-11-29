@@ -39,5 +39,11 @@ class UserModel
         $sentencia->execute(array($email,$administrador));
     }
 
+    function deleteUser($id_usuario = null){
+        $sentencia = $this->db->prepare('DELETE FROM usuario WHERE id_usuario=?');
+        $sentencia->execute(array($id_usuario));
+        return $sentencia->rowCount();
+    }
+
 
 };

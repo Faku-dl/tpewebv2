@@ -36,9 +36,9 @@ class MateriasView
   }
   function showDetalles($Asignatura)
   {
-    $smarty = new Smarty();  //ESTO ES CUALQUIER COSA
+    $smarty = new Smarty(); 
     $smarty->assign("titulo", $Asignatura->nombre_materia);
-    $smarty->assign("asignatura_s", $Asignatura); //todo es cualquier cosa. Perdón
+    $smarty->assign("asignatura_s", $Asignatura); 
 
     $smarty->display("templates/detalles.tpl");
   }
@@ -56,12 +56,13 @@ class MateriasView
     $smarty->assign("asignatura_s", $Asignatura);
     $smarty->display("templates/tablaAlumnos.tpl");
   }
-  function MostrarEditarTablaAlumnos($Titulo, $Alumnos, $id_alumno, $Asignatura)
+  function MostrarEditarTablaAlumnos($Titulo, $Alumnos, $id_alumno,$alumno, $Asignatura)
   {
     $smarty = new Smarty();
     $smarty->assign("titulo", $Titulo);
     $smarty->assign("alumnos_s", $Alumnos); //Nombre que le damos al array con smarty: "alumnos_s"
     $smarty->assign("asignatura_s", $Asignatura);
+    $smarty->assign("alumno_s", $alumno);
     $smarty->assign("alumno_id", $id_alumno);
     $smarty->display("templates/EditarTablaAlumno.tpl");
   }

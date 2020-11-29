@@ -126,8 +126,10 @@ class MateriasControlador
     {
         $this->comprobarSiHayUsuario();
 
-        if($_FILES['input_imagen']['type'] == "image/jpg" || $_FILES['input_imagen']['type'] == "image/jpeg" || $_FILES['input_imagen']['type'] == "image/png"&&!empty($_POST['select_materia'])
-        &&!empty($_POST['input_calificacion'])&&!empty($_POST['input_conducta'])&&!empty($_POST['input_email'])&&!empty($_POST['input_alumno'])){
+        if($_FILES['input_imagen']['type'] == "image/jpg" || $_FILES['input_imagen']['type'] == "image/jpeg" ||
+         $_FILES['input_imagen']['type'] == "image/png"&&!empty($_POST['select_materia'])
+        &&!empty($_POST['input_calificacion'])&&!empty($_POST['input_conducta'])&&!empty($_POST['input_email'])&&
+        !empty($_POST['input_alumno'])){
 
            /* $fileTemp = $_FILES["input_imagen"]["tmp_name"];
             $filePath = "imgs/" . uniqid("", true) . "." . strtolower(pathinfo($_FILES['input_imagen']['name'], PATHINFO_EXTENSION));
@@ -144,10 +146,21 @@ class MateriasControlador
 
     }
 
-    //////////////////////////////////////////////
-    function borrarImagen(){
+    function borrarImagen($params=null){
 
-        unlink(‘tutorial.txt’);
+        $this->comprobarSiHayUsuario();
+        $id_detalle = $params[':ID'];
+        $alumno=$this->model->getAlumnosPorId($id_detalle);
+        $imagen= $alumno->imagen;
+
+        if($this->model->deleteImagen($id_detalle)!=0){
+            
+            unlink($imagen);
+        }
+        
+        $usuario= $_SESSION['nombre_usuario'];
+        $this->view->showDetallesAlumno($alumno, $usuario);
+
     }
     function tablaAlumnos()
     {
@@ -169,9 +182,10 @@ class MateriasControlador
     {
         $this->comprobarSiHayUsuario();
         $id_alumno = $params[':ID'];
-        $Alumnos = $this->model->getTodosLosAlumnos();
-        $Asignatura = $this->model->getTodasLasMaterias();
-        $this->view->MostrarEditarTablaAlumnos($this->Titulo, $Alumnos, $id_alumno, $Asignatura);
+        $alumnos = $this->model->getTodosLosAlumnos();
+        $alumno= $this->model->getAlumnosPorId($id_alumno);
+        $asignatura = $this->model->getTodasLasMaterias();
+        $this->view->MostrarEditarTablaAlumnos($this->Titulo, $alumnos, $id_alumno,$alumno, $asignatura);
     }
     function EditarAlumno()
     {
@@ -182,7 +196,7 @@ class MateriasControlador
         $conducta = $_POST['edit_conducta'];
         $calificacion = $_POST['edit_calificacion'];
         $materia = $_POST['select_materia'];
-        $imagen= $_FILES["input_imagen"]["name"];
+        $imagen= $_FILES["input_imagen"]["tmp_name"];
         $this->model->editAlumno($id_alumno, $alumno, $email, $conducta, $calificacion, $materia,$imagen);
         $this->view->showTablaAlumnos();
     }

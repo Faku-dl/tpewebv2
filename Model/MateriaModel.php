@@ -127,6 +127,12 @@ class MateriaModel
         move_uploaded_file($imagen, $lugar);
         return $lugar;
     }
+    public function deleteImagen($id_alumno){
+
+        $sentencia = $this->db->prepare("UPDATE alumno SET imagen = null WHERE id_alumno=?");
+        $sentencia->execute([$id_alumno]);
+        return $sentencia->rowCount();
+    }
 
 ////////////////////////////////////COMENTARIO////////////////////////////////////////////////////
     function deleteComentario($id_comentario = null)

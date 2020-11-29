@@ -2,10 +2,11 @@
 require_once "./RouterAvanzado.php";
 require_once "Model/UserModel.php";
 require_once "View/UserView.php";
-class UserControlador
-{
+class UserControlador{
+
     private $view;
     private $model;
+
     function __construct()
     {
         $this->view = new UserView();
@@ -88,22 +89,32 @@ class UserControlador
 
     function editarUsuario($params = null)
     {
-        if ($this->comprobarSiEsAdministrador()) {
+        //if ($this->comprobarSiEsAdministrador()) {
             $id_usuario = $params[':ID'];
             $this->model->TraerUsuario($id_usuario);
             $usuarios= $this->model->getUsuarios();
-            $this->view->ShowtablaUsuarios($this->Titulo, $usuarios);
-        } else {
-        }
+            $this->view->ShowTablaUsuarios($this->Titulo, $usuarios);
     }
+
+
     function comprobarSiEsAdministrador()
     {
 
     }
-    function getUsuarios(){
+
+    function borrarUsuario($params = null){
+        //$this->comprobarSiEsAdministrador();
+        $id_usuario = $params[':ID'];
+        $this->model->deleteUser($id_usuario);
         $usuarios= $this->model->getUsuarios();
         $this->view->ShowtablaUsuarios($usuarios);
     }
+    function getUsuarios(){
+        $usuarios= $this->model->getUsuarios();
+        $this->view->ShowTablaUsuarios($usuarios);
+    }
+
+
 
     function entrarSinUsuario()
     {
