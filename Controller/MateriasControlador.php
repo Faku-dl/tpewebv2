@@ -16,6 +16,7 @@ class MateriasControlador
     {
         $this->view = new MateriasView();
         $this->model = new MateriaModel();
+        $this->userController =new UserControlador();
     }
 
     private function comprobarSiHayUsuario()

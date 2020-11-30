@@ -32,7 +32,7 @@ $r->addRoute("borrarImagen/:ID", "GET", "MateriasControlador", "borrarImagen");
 /////////////////////////////////USUARIO///////////////////////////////
 
 $r->addRoute("usuarios", "GET", "UserControlador", "getUsuarios"); 
-$r->addRoute("CambiarPermiso/:ID", "POST", "UserControlador", "editarUsuario");
+$r->addRoute("cambiarPermiso/:ID", "GET", "UserControlador", "editarUsuario");
 $r->addRoute("BorrarUsuario/:ID", "GET", "UserControlador", "borrarUsuario"); 
 $r->addRoute("VerificarUsuario", "POST", "UserControlador", "VerificarUsuario");
 $r->addRoute("login", "GET", "UserControlador", "login");

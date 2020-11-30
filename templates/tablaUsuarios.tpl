@@ -25,11 +25,11 @@
                         <!-- Estos solo se pueden ver si uno es Admin -->
 
                         {if ($usuario->administrador eq 0)}
-                            <td> <button type="button" class="btn btn-warning" href="CambiarPermiso/{$usuario->id_usuario}">Ascender a Admin</button> </td>
+                            <td> <button type="button" class="btn btn-warning"> <a href="cambiarPermiso/{$usuario->id_usuario}">Otorgar permisos</a></button> </td>
                         {elseif ($usuario->nombre_usuario eq Peron)}
                             <td> <button type="button" class="btn btn-outline-warning" disabled>Descender a Usuario</button> </td>
                         {else}
-                            <td> <button type="button" class="btn btn-outline-warning">Descender a Usuario</button> </td>
+                        <td> <button type="button" class="btn btn-warning"> <a href="cambiarPermiso/{$usuario->id_usuario}">Quitar permisos</a></button> </td>
                         {/if}
                         {if ($usuario->nombre_usuario eq Peron)}
                             <td> <button type="button" class="btn btn-danger" disabled><a class="text-white text-decoration-none" href="BorrarUsuario/{$usuario->id_usuario}">Borrar</a></button></td>                          

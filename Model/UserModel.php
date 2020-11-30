@@ -1,7 +1,4 @@
 <?php
-require_once "RouterAvanzado.php";
-require_once "Controller/UserControlador.php";
-
 
 class UserModel
 {
@@ -20,7 +17,18 @@ class UserModel
         $sentencia->execute(array($user));
         return $sentencia->fetch(PDO::FETCH_OBJ);
     }
-      
+    
+    function cambiarPermisos($user){
+
+        $sentencia = $this->db->prepare("UPDATE usuario SET administrador = NOT administrador  WHERE id_usuario=?");
+        $sentencia->execute(array($user));
+    }
+    
+    function TraerUsuarioPorNombre($user){
+        $sentencia = $this->db->prepare("SELECT * FROM usuario WHERE nombre_usuario=?");
+        $sentencia->execute(array($user));
+        return $sentencia->fetch(PDO::FETCH_OBJ);
+    }
     function CrearUsuario($nombre, $administrador,$email,$password)
     {
         $sentencia = $this->db->prepare('INSERT INTO usuario (nombre_usuario,administrador, email, password_u) VALUES(?,?,?,?)');

@@ -2,7 +2,8 @@
 require_once "./RouterAvanzado.php";
 require_once "Model/UserModel.php";
 require_once "View/UserView.php";
-class UserControlador{
+class UserControlador
+{
 
     private $view;
     private $model;
@@ -89,29 +90,39 @@ class UserControlador{
 
     function editarUsuario($params = null)
     {
-        //if ($this->comprobarSiEsAdministrador()) {
+        if ($this->comprobarSiEsAdministrador()) {
             $id_usuario = $params[':ID'];
-            $this->model->TraerUsuario($id_usuario);
-            $usuarios= $this->model->getUsuarios();
-            $this->view->ShowTablaUsuarios($this->Titulo, $usuarios);
+            $this->model->cambiarPermisos($id_usuario);
+            $usuarios = $this->model->getUsuarios();
+            $this->view->ShowTablaUsuarios($usuarios);
+        }
     }
 
 
     function comprobarSiEsAdministrador()
     {
-
+        session_start();
+        $user = $_SESSION['nombre_usuario'];
+        $userFromDB = $this->model->TraerUsuarioPorNombre($user);
+        return $userFromDB->administrador;
     }
 
-    function borrarUsuario($params = null){
-        //$this->comprobarSiEsAdministrador();
-        $id_usuario = $params[':ID'];
-        $this->model->deleteUser($id_usuario);
-        $usuarios= $this->model->getUsuarios();
-        $this->view->ShowtablaUsuarios($usuarios);
+    function borrarUsuario($params = null)
+    {
+
+        if ($this->comprobarSiEsAdministrador()) {
+            $id_usuario = $params[':ID'];
+            $this->model->deleteUser($id_usuario);
+            $usuarios = $this->model->getUsuarios();
+            $this->view->ShowtablaUsuarios($usuarios);
+        }
     }
-    function getUsuarios(){
-        $usuarios= $this->model->getUsuarios();
-        $this->view->ShowTablaUsuarios($usuarios);
+    function getUsuarios()
+    {
+        if ($this->comprobarSiEsAdministrador()) {
+            $usuarios = $this->model->getUsuarios();
+            $this->view->ShowTablaUsuarios($usuarios);
+        }
     }
 
 
