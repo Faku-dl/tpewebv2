@@ -32,7 +32,7 @@
                         <td> <button type="button" class="btn btn-warning"> <a href="cambiarPermiso/{$usuario->id_usuario}">Quitar permisos</a></button> </td>
                         {/if}
                         {if ($usuario->nombre_usuario eq Peron)}
-                            <td> <button type="button" class="btn btn-danger" disabled><a class="text-white text-decoration-none" href="BorrarUsuario/{$usuario->id_usuario}">Borrar</a></button></td>                          
+                            <td> <button type="button" class="btn btn-danger" disabled><a class="text-white text-decoration-none">Borrar</a></button></td>                          
                         {else}
                         <td> <button type="button" class="btn btn-danger"><a class="text-white text-decoration-none" href="BorrarUsuario/{$usuario->id_usuario}">Borrar</a></button></td>
                         {/if}

@@ -38,13 +38,13 @@ function render(comentarios){
 
     container.innerHTML += `
     <span class="commenter-pic">
+    
     </span>
     <span class="commenter-name">
     <a href="#">${comentario.usuario_nombre}</a>
     </span>
-    <p class="student-name">${comentario.nombre_alumno}</p>
-    <p class="estrellitas" >Valoracion: ${estrella}</p>
-    <p class="comment-txt more">${comentario.contenido}</p>
+    <p class="student-name">${comentario.nombre_alumno} <span class="badge badge-pill">${estrella}</span></p>
+    <p class="comment-txt more">${comentario.contenido} </p>
     <div class="comment-meta">
     <button id="editComment" type="button" class="btn btn-outline-warning">Editar</button>
     <button id="deleteComentario" value="${comentario.id_comentario}"type="button" class="btn btn-outline-danger">Eliminar</button>

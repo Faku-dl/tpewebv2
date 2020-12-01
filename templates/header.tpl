@@ -51,10 +51,7 @@
                 <button type="button" class="btn btn-primary"> <a href="login" class="text-white show-decoration-none"> Ingresar</a></button>
             </li>
         {/if}
-        <!-- Solo se debe poder ver si el usuario es Admin-->
-            <li>
-                <button type="button" class="btn btn-danger"> <a href="usuarios" class="text-white show-decoration-none"> Usuarios</a></button>
-            </li>
+        
                 <!-- VENTANA para CREAR CUENTA -->
                 <div class="modal fade" id="myModal10">
                     <div class="modal-dialog modal-dialog-centered">

@@ -29,7 +29,13 @@ class UserView{
         $smarty->display('templates/tablaUsuarios.tpl');
     }
 
+    function showNotAdmin($mensaje = null){
+        $smarty = new Smarty();
+        $smarty->assign('titulo', "Acceso denegado");
+        $smarty->assign('mensaje', $mensaje);
 
+        $smarty->display('templates/notAdmin.tpl');
+    }
 
 }
 

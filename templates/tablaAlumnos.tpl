@@ -5,6 +5,7 @@
         <table class="table table-hover">
             <thead class="thead-dark">
                 <tr>
+                    <th>Rostro</th>
                     <th>Alumno</th>
                     <th>Email</th>
                     <th>Conducta</th>
@@ -19,7 +20,9 @@
             <tbody>
                 {foreach from=$alumnos_s item= alumno}
                     <tr>
-                        <td><img src="{$alumno->imagen}" /></td>
+                        <td><div class="d-flex justify-content-center">
+                            <img src="{$alumno->imagen}" class="rounded-circle" style="width:105px;"/>
+                            </div></td>
                         <td><a href="DetalleAlumno/{$alumno->id_alumno}">{$alumno->nombre_alumno}</a></td>
                         <td>{$alumno->email}</td>
                         <td>{$alumno->conducta}</td>

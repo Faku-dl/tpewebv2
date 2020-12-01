@@ -20,6 +20,16 @@
                 <a href="tablaAlumnos" class="btn btn-outline-primary stretched-link">Ver todos los Alumnos</a>
             </div>
         </div>
+        <!-- Solo se debe poder ver si el usuario es Admin-->
+        <div class="card" style="width:325px">
+            <img class="card-img-top" src="imgs/users.png" alt="Usuarios" style="width:90%">
+            <div class="card-body">
+                <h4 class="card-title">Usuarios</h4>
+                <p class="card-text">Acceso a usuarios (Top secret)</p>
+                <a href="usuarios" class="btn btn-outline-info stretched-link">Ver todos los Usuarios</a>
+            </div>
+        </div>
+        
     </div>
 </div>
 {include file="footer.tpl"}

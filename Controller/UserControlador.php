@@ -123,6 +123,10 @@ class UserControlador
             $usuarios = $this->model->getUsuarios();
             $this->view->ShowTablaUsuarios($usuarios);
         }
+        else{
+            $this->view->showNotAdmin();
+
+        }
     }
 
 
