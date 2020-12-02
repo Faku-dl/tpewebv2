@@ -4,9 +4,9 @@ require_once 'ViewApi.php';
 
 
 abstract class ApiController {
-    protected $model; // lo instancia el hijo
+    protected $alumnosModel;
+    protected $comentariosModel;
     protected $view;
-
     private $data; 
 
     public function __construct() {

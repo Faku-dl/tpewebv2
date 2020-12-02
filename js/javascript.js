@@ -46,7 +46,6 @@ function render(comentarios){
     <p class="student-name">${comentario.nombre_alumno} <span class="badge badge-pill">${estrella}</span></p>
     <p class="comment-txt more">${comentario.contenido} </p>
     <div class="comment-meta">
-    <button id="editComment" type="button" class="btn btn-outline-warning">Editar</button>
     <button id="deleteComentario" value="${comentario.id_comentario}"type="button" class="btn btn-outline-danger">Eliminar</button>
     </div>
     `
@@ -71,16 +70,14 @@ function deleteComentario(){
   .catch(error => console.log('error', error));
 }
 
-
 function postComentario(){
   
-    const comentario ={
+      const comentario ={
       contenido: document.getElementById("contenido").value,
       usuario_nombre:document.getElementById("usuario").innerHTML,
       nombre_alumno: document.getElementById("nombre_alumno").innerHTML,
       valoracion_alumno: document.getElementById("select").value
     } 
-    document.getElementById("contenido").innerHTML="";
     const url= 'http://localhost/tpeweb2/api/alumnos/';
       fetch(url, {
         method: 'POST',

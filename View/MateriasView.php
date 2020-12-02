@@ -26,7 +26,6 @@ class MateriasView
 
     $smarty->display("templates/EditarTablaMateria.tpl");
   }
-
   function MostrarHome()
   {
     //comprobarSiHayUsuario();
@@ -48,12 +47,13 @@ class MateriasView
   }
 
   ///////////////////////////////////////ALUMNOS/////////////////////////////////////
-  function MostrarTablaAlumnos($Titulo, $Alumnos, $Asignatura)
+  function MostrarTablaAlumnos($Titulo, $Alumnos, $Asignatura, $paginas)
   {
     $smarty = new Smarty();
     $smarty->assign("titulo", $Titulo);
     $smarty->assign("alumnos_s", $Alumnos); //Nombre que le damos al array con smarty: "Alumnos_s"
     $smarty->assign("asignatura_s", $Asignatura);
+    $smarty->assign("paginas", $paginas);
     $smarty->display("templates/tablaAlumnos.tpl");
   }
   function MostrarEditarTablaAlumnos($Titulo, $Alumnos, $id_alumno,$alumno, $Asignatura)
@@ -67,20 +67,21 @@ class MateriasView
     $smarty->display("templates/EditarTablaAlumno.tpl");
   }
 
-  function showDetallesAlumno($Alumno,$usuario)
+  function showDetallesAlumno($Alumno)
   {
     $smarty = new Smarty();  //ESTO ES CUALQUIER COSA
     $smarty->assign("titulo", $Alumno->nombre_alumno);
     $smarty->assign("tituloMateria", $Alumno->materia);
     $smarty->assign("asignatura_s", $Alumno);
     $smarty->assign("alumno_s", $Alumno);
-    $smarty->assign("usuario", $usuario);
+    
+
     
     $smarty->display("templates/detalleAlumno.tpl");
   }
   function showTablaAlumnos()
   {
-    header("Location:" . BASE_URL . "tablaAlumnos");
+    header("Location:" . BASE_URL . "tablaAlumnos/1");
   }
 
 

@@ -3,7 +3,7 @@
 
         <!-- Modal Ordenar -->
         <h4>Filtrar por Materia</h4>
-        <form action="SelectAlumno" method="GET">
+        <form action="SelectAlumno" method="POST">
             <label for="validationCustom04">Seleccione la Materia a filtrar:</label>
             <select class="custom-select" id="validationCustom04" name="select_materia">
                 <option>Todas</option>
@@ -20,14 +20,13 @@
                 <button type="submit" class="btn btn-primary">Mostrar</button>
             </div>
         </form>
-    </div>
-    <div style="height: 15px;">
-    </div>
     <!-- Modal Ingresar Fila Materia-->
-    {if isset($smarty.session.nombre_usuario)}
-    <div class="d-flex justify-content-center">
-        <button type=" button" class="btn btn-info" data-toggle="modal" data-target="#myModal3">Ingresar Alumno</button>
-    </div>
+    {if empty($smarty.session.ADMIN) or  ($smarty.session.ADMIN eq 0)}
+               
+        {else}
+        <div class="d-flex justify-content-center">
+            <button type=" button" class="btn btn-info" data-toggle="modal" data-target="#myModal3">Ingresar Alumno</button>
+        </div>
     {/if}
     <div class="modal" id="myModal3">
         <div class="modal-dialog modal-dialog-centered">

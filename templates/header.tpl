@@ -15,7 +15,7 @@
     <!-- BARRA DE NAVEGACIÓn -->
     <nav class="navbar navbar-expand-md bg-light navbar-light">
         <a class="navbar-brand" href="main">
-            <img src="./imgs/Peron.jpg" alt="logo" style="width:55px;">
+            <img src="./imgs/Pepa.jpeg" alt="logo" style="width:55px;">
         </a>
         <a class="navbar-brand" href="home">Escuelita Virtual</a>
         <div class="container">
@@ -33,7 +33,9 @@
                 </li>
                 </ul>
                 {if isset($smarty.session.nombre_usuario)}
-                    <h4>{$smarty.session.nombre_usuario}, El General te da la bienvenida</h4>
+                    <h4>{$smarty.session.nombre_usuario}, Te damos la bienvenida</h4>
+                    {else} <h4>Invitado, le damos la bienvenida</h4>
+                        
                 {/if}
         </div>
         <!-- Navbar links -->

@@ -21,8 +21,6 @@ class UserControlador
         header("Location: " . LOGIN);
     }
 
-
-
     function login()
     {
         $this->view->ShowLogin();
@@ -73,6 +71,7 @@ class UserControlador
 
                     session_start();
                     $_SESSION['nombre_usuario'] = $userFromDB->nombre_usuario;
+                    $_SESSION['ADMIN'] = $userFromDB->administrador;
                     $_SESSION['navegando'] = time();
 
                     header("Location: " . BASE_URL . "Home");
@@ -89,8 +88,9 @@ class UserControlador
     }
 
     function editarUsuario($params = null)
-    {
-        if ($this->comprobarSiEsAdministrador()) {
+    {  
+        session_start();
+        if ($_SESSION['ADMIN']!=0) {
             $id_usuario = $params[':ID'];
             $this->model->cambiarPermisos($id_usuario);
             $usuarios = $this->model->getUsuarios();
@@ -99,37 +99,38 @@ class UserControlador
     }
 
 
-    function comprobarSiEsAdministrador()
-    {
-        session_start();
-        $user = $_SESSION['nombre_usuario'];
-        $userFromDB = $this->model->TraerUsuarioPorNombre($user);
-        return $userFromDB->administrador;
-    }
-
     function borrarUsuario($params = null)
     {
-
-        if ($this->comprobarSiEsAdministrador()) {
+        session_start();
+        if ($_SESSION['ADMIN']!=0) {
             $id_usuario = $params[':ID'];
             $this->model->deleteUser($id_usuario);
             $usuarios = $this->model->getUsuarios();
             $this->view->ShowtablaUsuarios($usuarios);
         }
     }
+
     function getUsuarios()
-    {
-        if ($this->comprobarSiEsAdministrador()) {
-            $usuarios = $this->model->getUsuarios();
-            $this->view->ShowTablaUsuarios($usuarios);
-        }
-        else{
-            $this->view->showNotAdmin();
+    {   
+        session_start();
+        if(!empty($_SESSION['nombre_usuario'])){
+            
+            if ($_SESSION['ADMIN']!=0) {
+                $usuarios = $this->model->getUsuarios();
+                $this->view->ShowTablaUsuarios($usuarios);
+            }
+            else{
+                $usuarios = $this->model->TraerUsuarioPorNombre($_SESSION['nombre_usuario']);
+                $this->view->showNotAdmin($usuarios);
+
+            }
+            }else{
+
+                $usuarios= "invitado";
+                $this->view->showNotAdmin($usuarios);
 
         }
     }
-
-
 
     function entrarSinUsuario()
     {

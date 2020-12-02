@@ -1,6 +1,7 @@
 <?php
 
 require_once "Controller/MateriasControlador.php";
+require_once "Controller/AlumnosControlador.php";
 require_once "Controller/UserControlador.php";
 require_once "RouterClass.php";
 
@@ -21,14 +22,14 @@ $r->addRoute("Editar/:ID", "GET", "MateriasControlador", "EditarID");
 $r->addRoute("Editar", "POST", "MateriasControlador", "EditarMateria");
 $r->addRoute("Detalle/:ID", "GET", "MateriasControlador", "DetalleMateria");
 /////////////////////////////////ALUMNO///////////////////////////////
-$r->addRoute("tablaAlumnos", "GET", "MateriasControlador", "tablaAlumnos"); 
-$r->addRoute("SelectAlumno", "GET","MateriasControlador", "getAlumnosPorAsig");
-$r->addRoute("InsertarAlumno", "POST","MateriasControlador", "InsertarAlumno");
-$r->addRoute("BorrarAlumno/:ID", "GET","MateriasControlador", "DeleteAlumno");
-$r->addRoute("EditarAlumno/:ID", "GET", "MateriasControlador", "EditarIdAlumno");
-$r->addRoute("EditarAlumno", "POST", "MateriasControlador", "EditarAlumno");
-$r->addRoute("DetalleAlumno/:ID", "GET", "MateriasControlador", "DetalleAlumno");
-$r->addRoute("borrarImagen/:ID", "GET", "MateriasControlador", "borrarImagen");
+$r->addRoute("tablaAlumnos/:ID", "GET", "AlumnosControlador", "getPaginacion");
+$r->addRoute("SelectAlumno", "POST","AlumnosControlador", "getAlumnosPorAsig");
+$r->addRoute("InsertarAlumno", "POST","AlumnosControlador", "InsertarAlumno");
+$r->addRoute("BorrarAlumno/:ID", "GET","AlumnosControlador", "DeleteAlumno");
+$r->addRoute("EditarAlumno/:ID", "GET", "AlumnosControlador", "EditarIdAlumno");
+$r->addRoute("EditarAlumno", "POST", "AlumnosControlador", "EditarAlumno");
+$r->addRoute("DetalleAlumno/:ID", "GET", "AlumnosControlador", "DetalleAlumno");
+$r->addRoute("borrarImagen/:ID", "GET", "AlumnosControlador", "borrarImagen");
 /////////////////////////////////USUARIO///////////////////////////////
 
 $r->addRoute("usuarios", "GET", "UserControlador", "getUsuarios"); 
@@ -39,7 +40,7 @@ $r->addRoute("login", "GET", "UserControlador", "login");
 $r->addRoute("logout", "GET", "UserControlador", "cerrarSesion");
 $r->addRoute("CrearUsuario", "POST","UserControlador", "CrearUsuario");
 /////////////////////////////////COMENTARIOS///////////////////////////////
-$r->addRoute("comentarios","GET","MateriasControlador", "getComentariosCSR");
+$r->addRoute("comentarios","GET","AlumnosControlador", "getComentariosCSR");
 
 
 $r->addRoute("main", "GET","MateriasControlador","Home"); 
