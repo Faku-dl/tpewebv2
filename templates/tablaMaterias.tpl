@@ -19,7 +19,7 @@
             <tbody>
                 {foreach from=$asignatura_s item= materia}
                     <tr>
-                        <td><a href="Detalle/{$materia->id_materia}" target="_blank">{$materia->nombre_materia}</a></td>
+                        <td><a href="Detalle/{$materia->id_materia}">{$materia->nombre_materia}</a></td>
                         <td>{$materia->profesor}</td>
                         <td>{$materia->curso}</td>
                         {if empty($smarty.session.ADMIN) or ($smarty.session.ADMIN eq 0)}

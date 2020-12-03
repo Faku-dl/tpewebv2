@@ -7,7 +7,7 @@ class UserControlador
 
     private $view;
     private $model;
-
+    private $authHelper;
     function __construct()
     {
         $this->view = new UserView();
@@ -23,30 +23,30 @@ class UserControlador
 
     function login()
     {
-        $this->view->ShowLogin();
+        $this->view->showLogin();
     }
 
-    function CrearUsuario()
+    function crearUsuario()
     {
         if (empty($_POST['crear_email'])) {
 
-            $this->view->ShowLogin("nada@nada.com no es un email, no se haga el gracioso y complete los campos con lo que se solicita POR FAVOR!");
+            $this->view->showLogin("nada@nada.com no es un email, no se haga el gracioso y complete los campos con lo que se solicita POR FAVOR!");
         } else if (empty($_POST['crear_nombre'])) {
 
-            $this->view->ShowLogin("...(vacio)... no es un nombre, si sus padres no le pusieron un nombre inventense uno... MUCHAS GRACIAS!");
+            $this->view->showLogin("...(vacio)... no es un nombre, si sus padres no le pusieron un nombre inventense uno... MUCHAS GRACIAS!");
         } else {
-            if ($userFromDB = $this->model->TraerUsuario($_POST['crear_nombre'])) {
+            if ($userFromDB = $this->model->traerUsuario($_POST['crear_nombre'])) {
 
-                $this->view->ShowLogin("El nombre de usuario ya existe: use la imaginación!");
+                $this->view->showLogin("El nombre de usuario ya existe: use la imaginación!");
             } else {
 
                 $hash = password_hash($_POST['crear_password'], PASSWORD_DEFAULT);
                 $user = $_POST["crear_email"];
-                $userFromDB = $this->model->TraerUsuario($user);
+                $userFromDB = $this->model->traerUsuario($user);
                 if ($userFromDB) {
-                    $this->view->ShowLogin("Ya usted tiene una cuenta con ese email, no aceptamos cuentas troll!");
+                    $this->view->showLogin("Ya usted tiene una cuenta con ese email, no aceptamos cuentas troll!");
                 } else {
-                    $this->model->CrearUsuario($_POST['crear_nombre'], 0, $_POST['crear_email'], $hash);
+                    $this->model->crearUsuario($_POST['crear_nombre'], 0, $_POST['crear_email'], $hash);
                     session_start();
                     $_SESSION['nombre_usuario'] = $_POST['crear_nombre'];
                     $_SESSION['navegando'] = time();
@@ -56,7 +56,7 @@ class UserControlador
             }
         }
     }
-    function VerificarUsuario()
+    function verificarUsuario()
     {
         $user = $_POST["validar_email"];
         $pass = $_POST["validad_password"];
@@ -76,14 +76,14 @@ class UserControlador
 
                     header("Location: " . BASE_URL . "Home");
                 } else {
-                    $this->view->ShowLogin("Contraseña incorrecta: si olvido su contraseña tome la pastillita o anotela");
+                    $this->view->showLogin("Contraseña incorrecta: si olvido su contraseña tome la pastillita o anotela");
                 }
             } else {
                 // No existe el user en la DB
-                $this->view->ShowLogin("El usuario no existe");
+                $this->view->showLogin("El usuario no existe");
             }
         } else {
-            $this->view->ShowLogin("nada@nada.com no es un email, no se haga el gracioso y complete los campos con lo que se solicita POR FAVOR!");
+            $this->view->showLogin("nada@nada.com no es un email, no se haga el gracioso y complete los campos con lo que se solicita POR FAVOR!");
         }
     }
 
@@ -94,7 +94,7 @@ class UserControlador
             $id_usuario = $params[':ID'];
             $this->model->cambiarPermisos($id_usuario);
             $usuarios = $this->model->getUsuarios();
-            $this->view->ShowTablaUsuarios($usuarios);
+            $this->view->showTablaUsuarios($usuarios);
         }
     }
 
@@ -106,7 +106,7 @@ class UserControlador
             $id_usuario = $params[':ID'];
             $this->model->deleteUser($id_usuario);
             $usuarios = $this->model->getUsuarios();
-            $this->view->ShowtablaUsuarios($usuarios);
+            $this->view->showtablaUsuarios($usuarios);
         }
     }
 
@@ -117,10 +117,10 @@ class UserControlador
             
             if ($_SESSION['ADMIN']!=0) {
                 $usuarios = $this->model->getUsuarios();
-                $this->view->ShowTablaUsuarios($usuarios);
+                $this->view->showTablaUsuarios($usuarios);
             }
             else{
-                $usuarios = $this->model->TraerUsuarioPorNombre($_SESSION['nombre_usuario']);
+                $usuarios = $this->model->traerUsuarioPorNombre($_SESSION['nombre_usuario']);
                 $this->view->showNotAdmin($usuarios);
 
             }

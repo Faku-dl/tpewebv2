@@ -1,39 +1,40 @@
 "use strict"
 
-document.addEventListener('DOMContentLoaded', () =>{
-  
+document.addEventListener('DOMContentLoaded', () => {
+
   getComentarios();
- // document.getElementById("enviarComentario").addEventListener("click",() =>{
+  document.getElementById("enviarComentario").addEventListener("submit", e => {
+    e.preventDefault();
+  })
 
-//}
-
-
-document.getElementById("enviarComentario").addEventListener("click", postComentario);
 });
+document.getElementById("enviarComentario").addEventListener("click", postComentario);
 
-function getComentarios(){
-  const id= document.getElementById("id_alumno").value;
-  const url= 'http://localhost/tpeweb2/api/alumnos/'+id;
+function getComentarios() {
+  const id = document.getElementById("id_alumno").value;
+  const url = 'http://localhost/tpeweb2/api/alumnos/' + id;
   const requestOptions = {
     method: 'GET',
     redirect: 'follow',
   };
-  
+
   fetch(url, requestOptions)
-  .then(response => response.json())
-  .then(comentarios => render(comentarios))
-  .catch(error => console.log('error:', error));
+    .then(response => response.json())
+    .then(comentarios => render(comentarios))
+    .catch(error => console.log('error:', error));
 }
 
-function render(comentarios){
-  let container= document.querySelector("#cajaComentarios");
-  container.innerHTML =""; 
-  
+function render(comentarios) {
+
+  let container = document.querySelector("#cajaComentarios");
+  container.innerHTML = "";
+  let admin = document.getElementById("admin").value;
   comentarios.forEach(comentario => {
-    let estrellitas= comentario.valoracion_alumno;
-    let estrella="";
-    for(let i=0; i<estrellitas;i++){
-      estrella+="⭐";
+    let estrellitas = comentario.valoracion_alumno;
+    let estrella = "";
+    console.log(admin);
+    for (let i = 0; i < estrellitas; i++) {
+      estrella += "⭐";
     }
 
     container.innerHTML += `
@@ -45,48 +46,51 @@ function render(comentarios){
     </span>
     <p class="student-name">${comentario.nombre_alumno} <span class="badge badge-pill">${estrella}</span></p>
     <p class="comment-txt more">${comentario.contenido} </p>
-    <div class="comment-meta">
-    <button id="deleteComentario" value="${comentario.id_comentario}"type="button" class="btn btn-outline-danger">Eliminar</button>
-    </div>
     `
+    
+    if (admin== 1) {
+
+      container.innerHTML += `<div class="comment-meta">
+      <button id="deleteComentario" value="${comentario.id_comentario}"type="button" class="btn btn-outline-danger aling-item-end">Eliminar</button>
+        </div>`
+    }else{
+       
+    }
   });
-  let botones= document.querySelectorAll("#deleteComentario");
+  let botones = document.querySelectorAll("#deleteComentario");
   botones.forEach(element => {
     element.addEventListener("click", deleteComentario);
   });
+
 }
 
-function deleteComentario(){
+function deleteComentario() {
+  let id = this.value;
 
-  let id= this.value;
-
-  const url= 'http://localhost/tpeweb2/api/alumnos/'+id;
+  const url = 'http://localhost/tpeweb2/api/alumnos/' + id;
   fetch(url, {
     method: 'DELETE',
-    
   })
 
-  .then(getComentarios())
-  .catch(error => console.log('error', error));
+    .then(getComentarios())
+    .catch(error => console.log('error:', error));
 }
 
-function postComentario(){
-  
-      const comentario ={
-      contenido: document.getElementById("contenido").value,
-      usuario_nombre:document.getElementById("usuario").innerHTML,
-      nombre_alumno: document.getElementById("nombre_alumno").innerHTML,
-      valoracion_alumno: document.getElementById("select").value
-    } 
-    const url= 'http://localhost/tpeweb2/api/alumnos/';
-      fetch(url, {
-        method: 'POST',
-        header:{ "Content-type":"application/json"},
-        body:JSON.stringify(comentario)
-      })
-      .then(response => response.json())
-      .then(getComentarios())
-      .catch(error => console.log('error', error));
-      
-
+function postComentario() {
+  const comentario = {
+    contenido: document.getElementById("contenido").value,
+    usuario_nombre: document.getElementById("usuario").innerHTML,
+    nombre_alumno: document.getElementById("nombre_alumno").innerHTML,
+    valoracion_alumno: document.getElementById("select").value
+  }
+  document.getElementById("contenido").value= " ";
+  const url = 'http://localhost/tpeweb2/api/alumnos/';
+  fetch(url, {
+    method: 'POST',
+    header: { "Content-type": "application/json" },
+    body: JSON.stringify(comentario)
+  })
+    .then(response => response.json())
+    .then(comentario => getComentarios())
+    .catch(error => console.log('error:', error));
 }

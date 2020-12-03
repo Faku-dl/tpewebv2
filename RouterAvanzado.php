@@ -17,35 +17,35 @@ $r->addRoute("tablaMaterias", "GET", "MateriasControlador", "tablaMaterias");
 
 $r->addRoute("Select", "GET","MateriasControlador", "getMateriasPorAsig");
 $r->addRoute("Insertar", "POST","MateriasControlador", "InsertarMateria");
-$r->addRoute("Borrar/:ID", "GET","MateriasControlador", "DeleteMateria");
-$r->addRoute("Editar/:ID", "GET", "MateriasControlador", "EditarID");
-$r->addRoute("Editar", "POST", "MateriasControlador", "EditarMateria");
-$r->addRoute("Detalle/:ID", "GET", "MateriasControlador", "DetalleMateria");
+$r->addRoute("Borrar/:ID", "GET","MateriasControlador", "deleteMateria");
+$r->addRoute("Editar/:ID", "GET", "MateriasControlador", "editarID");
+$r->addRoute("Editar", "POST", "MateriasControlador", "editarMateria");
+$r->addRoute("Detalle/:ID", "GET", "MateriasControlador", "detalleMateria");
 /////////////////////////////////ALUMNO///////////////////////////////
 $r->addRoute("tablaAlumnos/:ID", "GET", "AlumnosControlador", "getPaginacion");
 $r->addRoute("SelectAlumno", "POST","AlumnosControlador", "getAlumnosPorAsig");
-$r->addRoute("InsertarAlumno", "POST","AlumnosControlador", "InsertarAlumno");
-$r->addRoute("BorrarAlumno/:ID", "GET","AlumnosControlador", "DeleteAlumno");
-$r->addRoute("EditarAlumno/:ID", "GET", "AlumnosControlador", "EditarIdAlumno");
-$r->addRoute("EditarAlumno", "POST", "AlumnosControlador", "EditarAlumno");
-$r->addRoute("DetalleAlumno/:ID", "GET", "AlumnosControlador", "DetalleAlumno");
+$r->addRoute("InsertarAlumno", "POST","AlumnosControlador", "insertarAlumno");
+$r->addRoute("BorrarAlumno/:ID", "GET","AlumnosControlador", "deleteAlumno");
+$r->addRoute("EditarAlumno/:ID", "GET", "AlumnosControlador", "editarIdAlumno");
+$r->addRoute("EditarAlumno", "POST", "AlumnosControlador", "editarAlumno");
+$r->addRoute("DetalleAlumno/:ID", "GET", "AlumnosControlador", "detalleAlumno");
 $r->addRoute("borrarImagen/:ID", "GET", "AlumnosControlador", "borrarImagen");
 /////////////////////////////////USUARIO///////////////////////////////
 
 $r->addRoute("usuarios", "GET", "UserControlador", "getUsuarios"); 
 $r->addRoute("cambiarPermiso/:ID", "GET", "UserControlador", "editarUsuario");
 $r->addRoute("BorrarUsuario/:ID", "GET", "UserControlador", "borrarUsuario"); 
-$r->addRoute("VerificarUsuario", "POST", "UserControlador", "VerificarUsuario");
+$r->addRoute("VerificarUsuario", "POST", "UserControlador", "verificarUsuario");
 $r->addRoute("login", "GET", "UserControlador", "login");
 $r->addRoute("logout", "GET", "UserControlador", "cerrarSesion");
-$r->addRoute("CrearUsuario", "POST","UserControlador", "CrearUsuario");
+$r->addRoute("CrearUsuario", "POST","UserControlador", "crearUsuario");
 /////////////////////////////////COMENTARIOS///////////////////////////////
 $r->addRoute("comentarios","GET","AlumnosControlador", "getComentariosCSR");
 
 
-$r->addRoute("main", "GET","MateriasControlador","Home"); 
+$r->addRoute("main", "GET","MateriasControlador","home"); 
 
-$r->setDefaultRoute("MateriasControlador", "Home");
+$r->setDefaultRoute("MateriasControlador", "home");
 //RUN
 $r->route($_GET['action'], $_SERVER['REQUEST_METHOD']);
 

@@ -23,19 +23,15 @@ class AuthHelper {
     }
 
     function checkAdmin(){
-    
-        if($_SESSION['ADMIN']!=0 || $_SESSION['ADMIN']== null )
-        return false;
-        else return true;
-
-    }
-
-    public function checkLoggedIn() {
         session_start();
-        if (!isset($_SESSION['nombre_usuario'])) {
-            header('Location: ' . LOGIN);
-            die();
-        }       
+        if($_SESSION['ADMIN']!=0 || $_SESSION['ADMIN']== null ){
+            
+            return false;
+        }
+        else{
+         return true;
+        }    
+
     }
 
     public function getNombreDeUsuario() {
@@ -56,6 +52,7 @@ class AuthHelper {
             }
         }
         $_SESSION['navegando'] = time();
+        return true;
     }
 
     public function getTodasLasMaterias(){

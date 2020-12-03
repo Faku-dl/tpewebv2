@@ -29,7 +29,7 @@ class MateriaModel
         return $sentencia->fetchAll(PDO::FETCH_OBJ);
     }
 
-    function InsertarMateria($materia, $profesor, $curso)
+    function insertarMateria($materia, $profesor, $curso)
     {
 
         $sentencia = $this->db->prepare('INSERT INTO materia(nombre_materia,profesor,curso) VALUES(?,?,?) ');
@@ -48,12 +48,13 @@ class MateriaModel
         $sentencia->execute(array($materia, $profesor, $curso, $id_materia));
     }
 
-    function MostrarMateria($id_materia)
+    function mostrarMateria($id_materia)
     { 
         $sentencia = $this->db->prepare('SELECT * FROM alumno INNER JOIN materia ON alumno.materia=materia.nombre_materia WHERE id_materia=?');
         $sentencia->execute([$id_materia]);
         return $sentencia->fetchAll(PDO::FETCH_OBJ);
     }
+
     function getMateriaPorNombre($nombre_materia)
     {
         $sentencia = $this->db->prepare('SELECT FROM materia WHERE nombre_materia=?');

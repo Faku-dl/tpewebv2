@@ -76,7 +76,7 @@ class AlumnosModel
         return $sentencia->rowCount();
     }
 
-    function MostrarAlumno($id_alumno)
+    function mostrarAlumno($id_alumno)
     {
         $sentencia = $this->db->prepare('SELECT * FROM alumno INNER JOIN materia ON alumno.materia=materia.nombre_materia WHERE id_alumno=?');
         $sentencia->execute([$id_alumno]);

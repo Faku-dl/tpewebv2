@@ -1,11 +1,13 @@
 {include file="header.tpl"}
-<p>{$asignatura_s->nombre_materia}</p>
-<h3 class="display-3">Titular a cargo:</h3>
-<p>{$asignatura_s->profesor}</p>
-<h3 class="display-3">Curso:</h3>
-<p>{$asignatura_s->curso}</p>
-{foreach from=$asignatura_s->nombre_alumno item= alumno}
-    <ul><li>{$alumno}</li>
-    </ul>
-{/foreach}
+{if $asignatura_s neq null}
+    <h3 class="display-3">Alumnos que cursan la materia</h3>
+    
+    {foreach from=$asignatura_s item= alumno}
+        <ul><li>{$alumno->nombre_alumno}</li>
+        </ul>
+    {/foreach}
+    {else}
+    <h3 class="display-3">No hay alumnos en esta materia</h3>
+        
+{/if}
 {include file="footer.tpl"}

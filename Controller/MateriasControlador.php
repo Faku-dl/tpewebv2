@@ -23,7 +23,7 @@ require_once "Helpers/AuthHelper.php";
     {
         $this->authHelper->comprobarSiHayUsuario();
         $Asignatura = $this->authHelper->getTodasLasMaterias();
-        $this->view->MostrarTablaMateria($this->Titulo, $Asignatura);
+        $this->view->mostrarTablaMateria($this->Titulo, $Asignatura);
     }
 
     function getMateriasPorAsig()
@@ -31,30 +31,30 @@ require_once "Helpers/AuthHelper.php";
         $this->authHelper->comprobarSiHayUsuario();
         if ($_GET['select_materia'] != "Todas") {
             $Asignatura = $this->model->getMateriasPorAsig($_GET['select_materia']);
-            $this->view->MostrarTablaMateria($this->Titulo, $Asignatura);
+            $this->view->mostrarTablaMateria($this->Titulo, $Asignatura);
         } else {
             $this->view->showTablaMaterias();
         }
     }
-    function InsertarMateria()
+    function insertarMateria()
     {
         $this->authHelper->comprobarSiHayUsuario();
         
-        $this->model->InsertarMateria($_POST['input_materia'], $_POST['input_profesor'], $_POST['input_curso']);
+        $this->model->insertarMateria($_POST['input_materia'], $_POST['input_profesor'], $_POST['input_curso']);
         $this->view->showTablaMaterias();
     }
     function tablaMaterias()
     {
         $this->authHelper->comprobarSiHayUsuario();
         $this->Asignatura = $this->authHelper->getTodasLasMaterias();
-        $this->view->MostrarTablaMateria($this->Titulo, $this->Asignatura);
+        $this->view->mostrarTablaMateria($this->Titulo, $this->Asignatura);
     }
-    function Home()
+    function home()
     {
         $this->authHelper->comprobarSiHayUsuario();
-        $this->view->MostrarHome();
+        $this->view->mostrarHome();
     }
-    function DeleteMateria($params = null)
+    function deleteMateria($params = null)
     {
 
         $id_materia = $params[':ID'];
@@ -62,13 +62,13 @@ require_once "Helpers/AuthHelper.php";
         $this->view->showTablaMaterias($id_materia);
     }
 
-    function EditarID($params = null)
+    function editarID($params = null)
     {
         $id_materia = $params[':ID'];
         $Asignatura = $this->authHelper->getTodasLasMaterias();
-        $this->view->MostrarEditarTabla($this->Titulo, $Asignatura, $id_materia);
+        $this->view->mostrarEditarTabla($this->Titulo, $Asignatura, $id_materia);
     }
-    function EditarMateria()
+    function editarMateria()
     {   
         $id_materia = $_POST['id_materia'];
         $materia = $_POST['edit_materia'];
@@ -78,11 +78,11 @@ require_once "Helpers/AuthHelper.php";
         $this->model->editMateria($id_materia, $materia, $profesor, $curso);
         $this->view->showTablaMaterias();
     }
-    function DetalleMateria($params = null)
+    function detalleMateria($params = null)
     {
         $id_detalle = $params[':ID'];
-        $Asignatura = $this->model->MostrarMateria($id_detalle);
-        $this->view->showDetalles($Asignatura);
+        $asignatura = $this->model->MostrarMateria($id_detalle);
+        $this->view->showDetalles($asignatura);
     }
 
 }
